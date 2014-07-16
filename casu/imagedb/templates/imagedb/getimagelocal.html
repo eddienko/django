@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+
+{% block css.extra %}
+<link rel="stylesheet" type="text/css" href="{% static 'imagedb/style.css' %}" />
+{% endblock css.extra%}
+
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+{% block pagename %}
+Local Postage Stamp
+{% endblock pagename %}
+
+
+{% block content %}
+
+{% if imagedata %}
+<div id="imagedata">
+<img alt="Embedded Image" src="{{ imagedata }}"/>
+</div>
+{% endif %}
+
+<form id="getimagelocal" action="{% url 'imagedb:getImageLocal' %}" method="post">
+{% csrf_token %}
+<label>R.A. (degrees)</label>
+<input type="text" name="ra" value="{{ ra }}"><br/>
+
+<label>Dec (degrees)</label>
+<input type="text" name="dec" value="{{ dec }}"><br/>
+
+<label>Size (arcsec)</label>
+<input type="text" name="size" value="{{ size }}"><br/>
+
+<label>Image [Hdu]</label>
+<input class="image" type="text" name="image" value="{{ image }}">
+<input class="hdu" type="text" name="hdu" value="{{ hdu }}"><br/>
+
+<label>Options</label>
+<input type="text" name="options" value="{{ options }}"><br/>
+
+
+<input type="submit" value="Submit" />
+</form>
+
+{% endblock content%}

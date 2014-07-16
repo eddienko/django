@@ -1,0 +1,6 @@
+.idea
+*.sqlite3
+*.pyc
+bin
+*~
+casu/imagedb/data

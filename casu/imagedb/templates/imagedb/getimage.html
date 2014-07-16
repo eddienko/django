@@ -1,0 +1,176 @@
+{% extends "base.html" %}
+
+
+
+{% load staticfiles %}
+
+{% block css.extra %}
+<link rel="stylesheet" type="text/css" href="{% static 'imagedb/style.css' %}"/>
+{% endblock css.extra %}
+
+{% block js.extra %}
+<script type="text/javascript" src="{% static 'casu/js/jquery.lazyload.js' %}"></script>
+{% endblock js.extra %}
+
+{% block head.extra %}
+<script type="text/javascript" charset="utf-8">
+  $(function() {
+     $("img.lazy").lazyload({
+        effect : "fadeIn"
+    });
+  });
+
+</script>
+{% endblock head.extra %}
+
+{% block sitetitle %}ImageDB{% endblock sitetitle %}
+
+{% block cssmenu %}{% include "imagedb/cssmenu.html" %}{% endblock cssmenu %}
+
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+{% block pagename %}
+Postage Stamp
+{% endblock pagename %}
+
+
+{% block content %}
+
+
+<form id="getimage" action="{% url 'imagedb:getImage' %}" method="post">
+    {% csrf_token %}
+
+    {% csrf_token %}
+    <table>
+        <tr>
+            <td valign="top" style="padding: 1em">
+                <label>R.A. (degrees)</label>
+                <input type="text" name="ra" value="{{ ra }}"><br/>
+
+                <label>Dec (degrees)</label>
+                <input type="text" name="dec" value="{{ dec }}"><br/>
+
+                <label>Size (arcsec)</label>
+                <input type="text" name="size" value="{{ size }}"><br/>
+
+                <label>Options</label>
+                <input type="text" name="options" value="{{ options }}"><br/>
+            </td>
+            <!--
+            <td valign="top"  style="padding: 1em; border-left: 1px solid silver">
+                <input type="checkbox" name="download" value="download" > Stage results for download
+            </td>
+            -->
+        </tr>
+    </table>
+
+    <input type="submit" value="Submit"/>
+</form>
+
+{% if images %}
+<div style="padding: 1em">
+    <h3 style="display: block; border-bottom: 1px solid #ccc; padding: 1em">Query Results</h3>
+    <table style="width: 100%; border: 1px solid #ccc">
+        <tr style="background-color: #ccc">
+            <th></th>
+            <th>Image Name</th>
+            <th>Object</th>
+            <th>Coordintes</th>
+            <th>Waveband</th>
+            <th>Instrument</th>
+            <th>Additional Information</th>
+        </tr>
+        {% for img in images %}
+        <tr>
+            <td>
+                {% if img.avail %}
+                <span style="background-color: green; padding: 0 0.25em">&nbsp;</span>
+                {% else %}
+                <span style="background-color: red; padding: 0 0.25em">&nbsp;</span>
+                {% endif %}
+
+            </td>
+            <td>{{img.filename}}[{{img.extno}}]</td>
+            <td>{{img.objname}}</td>
+            <td>{{img.cencoords}}</td>
+            <td>{{img.waveband}}</td>
+            <td>{{img.instrument}}</td>
+            <td>{{img.addinfo}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<!--p>Download all stamps: [ <a href="#">PNG</a> ] &nbsp; [ <a href="#">FITS</a> ] </p-->
+
+<h3 style="display: block; border-bottom: 1px solid #ccc; padding: 1em">Postage Stamps</h3>
+<ul style="list-style-type: none;  ">
+    {% if vistaRGB %}
+    <li style="display: inline; float: left; border: 0px solid silver; padding: 0.0em">
+        <table>
+            <tr>
+                <td style="text-align: center"> VIRCAM Colour Image <br/> &nbsp; {{vistaBands}} &nbsp; </td>
+            </tr>
+            <tr>
+                <td width="400px" height="400px" style="text-align: center">
+                    <img class="lazy" src="{% static 'casu/ajax-loader.gif' %}"
+                         data-original="{% url 'imagedb:getImageCache' vistaRGB %}"></img>
+                </td>
+            </tr>
+        </table>
+    </li>
+    {% endif %}
+    {% if vstRGB %}
+    <li style="display: inline; float: left; border: 0px solid silver; padding: 0.0em">
+        <table>
+            <tr>
+                <td style="text-align: center"> OMEGACAM Colour Image <br/> &nbsp; {{vstBands}} &nbsp;</td>
+            </tr>
+            <tr>
+                <td width="400px" height="400px" style="text-align: center">
+                    <img class="lazy" src="{% static 'casu/ajax-loader.gif' %}"
+                         data-original="{% url 'imagedb:getImageCache' vstRGB %}"></img>
+                </td>
+            </tr>
+        </table>
+    </li>
+    {% endif %}
+    {% if wfcRGB %}
+    <li style="display: inline; float: left; border: 0px solid silver; padding: 0.0em">
+        <table>
+            <tr>
+                <td style="text-align: center"> WFC Colour Image <br/> &nbsp; {{wfcBands}} &nbsp;</td>
+            </tr>
+            <tr>
+                <td width="400px" height="400px" style="text-align: center">
+                    <img class="lazy" src="{% static 'casu/ajax-loader.gif' %}"
+                         data-original="{% url 'imagedb:getImageCache' wfcRGB %}"></img>
+                </td>
+            </tr>
+        </table>
+    </li>
+    {% endif %}
+    {% for img in images %}
+    {% if img.avail %}
+    <li style="display: inline; float: left; border: 0px solid silver; padding: 0.0em">
+        <table>
+            <tr>
+                <td style="text-align: center">{{img.instrument}} - {{img.waveband}}<br/>{{img.filename}}</td>
+            </tr>
+            <tr>
+                <td width="400px" height="400px" style="text-align: center">
+                    <img class="lazy" src="{% static 'casu/ajax-loader.gif' %}"
+                         data-original="{% url 'imagedb:getImageCache' img.md5hash %}"></img>
+                </td>
+            </tr>
+        </table>
+    </li>
+    {% endif %}
+    {% endfor %}
+</ul>
+
+<br clear="left"/>
+{% endif %}
+
+{% endblock content%}

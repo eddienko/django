@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<!-- https://github.com/tedtieken/django-slingshot/blob/master/templatetemplates/magazine/templates/base.html -->
+		
+		{% load staticfiles %}
+		
+		{% block css %}
+		<link rel="stylesheet" type="text/css" href="{% static 'casu/style.css' %}" />
+		{% block css.extra %}{% endblock css.extra %}
+		{% endblock css %}
+		
+		{% block js %}
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		{% block js.extra %}{% endblock js.extra %}
+		{% endblock js %}
+		
+		{% block head.extra %}
+		{% endblock head.extra %}
+		
+	</head>
+	
+	{% block body %}
+	<body>
+	
+	{% block header %}
+		<div id="header">
+            <div id="auth" style="position: absolute; top: 0px; right: 2em; color: white; font-size: 8pt">
+            {% if user.is_authenticated %}
+                You are logged is as <spanm style="color: yellow">{{ user.username }}</span>
+            {% else %}
+                Login
+            {% endif %}
+            </div>
+
+			<div id="sitetitle">{% block sitetitle %}Site Title{% endblock sitetitle %}</div>
+
+            <div id='cssmenu'>
+            {% block cssmenu %}  {% endblock cssmenu %}
+            </div>
+
+		</div>
+
+
+	{% endblock header %}
+
+	<div id="contents" class="container" style="min-height: 400px;">
+		{% block pagename %}{% endblock pagename %}
+
+        {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+		{% block content %}<p>ERROR: No contents found for specified URL.</p>{% endblock content %}
+
+	</div>
+
+	</body>
+	{% endblock body %}	
+</html>
