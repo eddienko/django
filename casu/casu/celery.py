@@ -9,7 +9,7 @@ from django.conf import settings
 # set the default Django settings module for the 'celery' program.
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'casu.settings')
 
-app = Celery('casu', broker='amqp://', backend='amqp://')
+app = Celery('casu', broker='amqp://guest:guest@localhost', backend='amqp://guest:guest@localhost')
 
 # Using a string here means the worker will not have to
 # pickle the object when using Windows.

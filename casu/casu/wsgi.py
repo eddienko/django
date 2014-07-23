@@ -11,4 +11,8 @@ import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "casu.settings")
 
 from django.core.wsgi import get_wsgi_application
+from dj_static import Cling, MediaCling
+
 application = get_wsgi_application()
+#application = Cling(MediaCling(get_wsgi_application()))
+

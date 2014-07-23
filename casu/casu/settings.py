@@ -13,7 +13,12 @@ import os
 
 from configobj import ConfigObj
 from os.path import expanduser
-config = ConfigObj(expanduser("~/.configobj"))
+
+#config = ConfigObj(expanduser("~/.configobj"))
+
+os.environ.setdefault("DYLD_LIBRARY_PATH", "/usr/lib:/Library/PostgreSQL/9.3/lib")
+
+config = ConfigObj("/Users/eglez/.configobj")
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
@@ -30,6 +35,17 @@ TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'casu', 'templates').replace('\\','/'),
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+ 'django.core.context_processors.debug',
+ 'django.core.context_processors.i18n',
+ 'django.core.context_processors.media',
+ 'django.core.context_processors.static',
+ 'django.core.context_processors.tz',
+ 'django.contrib.messages.context_processors.messages',
+    'django.core.context_processors.request',
+)
+
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'casu', 'static').replace('\\','/'),
 )
@@ -37,10 +53,9 @@ STATICFILES_DIRS = (
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = False
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -106,4 +121,5 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
+STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'

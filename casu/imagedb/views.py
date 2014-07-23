@@ -14,6 +14,7 @@ from imagedb.settings import CACHE, REQUESTS
 from casu.celery import app
 from imagedb.tasks import computemd5
 from PIL import Image as PILImage
+from casu.settings import ALLOWED_HOSTS
 
 # Create your views here.
 def index(request):
@@ -44,10 +45,6 @@ def getImage(request):
     except:
         return render(request, 'imagedb/getimage.html', context)
 
-    # ra = 0.679736796511
-    #dec = -44.49532291541
-    #size = 60.0
-
     # Perform database query and get results
     result = Image.objects.all().filter(cendec__gt=dec - 1, cendec__lt=dec + 1, cenra__gt=ra - 1, cenra__lt=ra + 1)
     onchip = "onchip(%s,%s,naxis1, naxis2, ctype1, ctype2, crval1, crval2, crpix1, crpix2, cd11, cd12, cd21, cd22, pv21, pv23, pv25)=true" % (
@@ -64,13 +61,19 @@ def getImage(request):
         req.userAnonymous = False
         req.userName = request.user.username
         req.userGroup = ' '.join([g.name for g in request.user.groups.all()])
+        req.md5hash = computemd5((ra, dec, size, options.replace('U', ''), req.userGroup))
+
     req.save()
 
+    request.session["md5unique"] = req.md5hash
+
     outputDir = os.path.join(REQUESTS, '%010d' % req.id)
-    if (not os.access(outputDir, os.X_OK)):
+    if not os.access(outputDir, os.X_OK):
         os.mkdir(outputDir)
+        os.chmod(outputDir, 0777)
 
     # Get full list of images
+    flag = False
     keys = [f.name for f in Image._meta.fields]
     images = []
     for img in result:
@@ -83,7 +86,9 @@ def getImage(request):
         # Work out if the user has access rights
         dd['avail'] = False
 
-        if (img.groupname == 'public'):
+        if ip in ALLOWED_HOSTS:
+            dd['avail'] = True
+        elif (img.groupname == 'public'):
             dd['avail'] = True
         else:
             if request.user.is_authenticated():
@@ -94,27 +99,12 @@ def getImage(request):
                     dd['avail'] = True
         images.append(dd)
         if dd['avail']:
-            ch = Cache(request=req.id, path=os.path.join(img.filepath, img.filename), hdu=img.extno, image=img.id,
+            flag = True
+            ch = Cache(request=req, path=os.path.join(img.filepath, img.filename), hdu=img.extno, image=img.id,
                        md5hash=dd['md5hash'])
             ch.save()
 
     images.sort(key=SortKey)
-
-    fh = open(os.path.join(outputDir, 'list'), 'w')
-    flag = False
-    for img in images:
-        if not img['avail']: continue
-        cacheFile = CACHE + '/%s.png' % img['md5hash']
-        if os.access(cacheFile, os.R_OK):
-            if ('U' in options):
-                if os.access(cacheFile, os.R_OK):
-                    os.unlink(cacheFile)
-            else:
-                continue
-        fh.write('%s %s %s %s %s %s %s %s\n' % (
-        img.filepath, img.filename, img.extno, ra, dec, size, options + '_', img.md5hash))
-        flag = True
-    fh.close()
 
     # Write unique md5
     fh = open(os.path.join(outputDir, 'md5unique'), 'w').write(md5unique)
@@ -148,7 +138,7 @@ def getImage(request):
             if f in dd:
                 cimages.append([images[i].md5hash for i in dd[f]])
                 cbands.append(f)
-                count = count + 1
+                count += 1
                 if count == 3:
                     break
 
@@ -255,8 +245,16 @@ def getImage(request):
     # -------------------------------------------------------------------------
 
     # Check if celery is accepting connections and submit job -----------------
+    status = app.send_task('imagedb.tasks.status')
+    time.sleep(0.1)
+    status = status.ready()
+
+    outCache = CACHE + '/' + request.session['md5unique']
+    if os.access(outCache, os.R_OK):
+        flag=False
+
     if flag:
-        if celeryStatus():
+        if status:
             result = app.send_task('imagedb.tasks.getImage', args=(req.id,))
     # -------------------------------------------------------------------------
 
@@ -272,12 +270,13 @@ def getImage(request):
 
 
 def getImageCache(request, md5hash):
-    imgFile = CACHE + '/%s.png' % md5hash
+    imgFile = CACHE + '/' + request.session['md5unique'] + '/%s.png' % md5hash
     watch = time.time()
     while not os.access(imgFile, os.R_OK):
         if time.time() - watch > 60:
             break
-    if md5hash.find('rgb') > -1: time.sleep(2)
+        time.sleep(1)
+    if md5hash.find('rgb') > -1: time.sleep(1)
     with open(imgFile, "rb") as image:
         return HttpResponse(image.read(), mimetype="image/png")
 

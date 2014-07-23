@@ -22,12 +22,27 @@ class Request(models.Model):
     userGroup = models.CharField(max_length=80, null=True)
 
 class Cache(models.Model):
-    request = models.IntegerField()
+
     path = models.CharField(max_length=200)
     hdu = models.PositiveSmallIntegerField()
-    image = models.IntegerField()
 
     md5hash = models.CharField(max_length=80)
+
+    image = models.IntegerField(null=True)
+
+    #waveband = models.CharField(max_length=40)
+    #telescope =  models.CharField(max_length=40)
+    #instrument =  models.CharField(max_length=40)
+    #seeing = models.FloatField(null=True)
+    #skynoise = models.FloatField(null=True)
+    #pixscl = models.FloatField()
+
+    request = models.ForeignKey('Request')
+
+
+class Collection(models.Model):
+    name = models.CharField(max_length=256)
+    addinfo = models.CharField(max_length=256)
 
 class Image(models.Model):
     filename = models.CharField(max_length=80)
@@ -76,6 +91,8 @@ class Image(models.Model):
     
     groupname = models.CharField(max_length=256)
     seqn = models.IntegerField()
+
+    collection = models.ForeignKey('Collection')
     
     
     

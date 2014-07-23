@@ -42,7 +42,11 @@ def getImage(reqID = 1):
     p.wait()
           
     return
-    
+
+@shared_task
+def status():
+    return True
+
 @shared_task
 def add(x, y):
     return x + y

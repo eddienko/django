@@ -27,9 +27,10 @@
 		<div id="header">
             <div id="auth" style="position: absolute; top: 0px; right: 2em; color: white; font-size: 8pt">
             {% if user.is_authenticated %}
-                You are logged is as <spanm style="color: yellow">{{ user.username }}</span>
+                You are logged is as <span style="color: yellow">{{ user.username }}</span>&nbsp;&nbsp;
+                <a style="color: white; text-decoration: none" href="{% url 'logout'  %}?next={{request.get_full_path}}">[Logout]</a>
             {% else %}
-                Login
+                <a style="color: white; text-decoration: none" href="{% url 'login'  %}?next={{request.get_full_path}}">Login</a>
             {% endif %}
             </div>
 
