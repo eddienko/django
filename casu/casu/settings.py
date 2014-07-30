@@ -67,7 +67,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'accounts',
-    'imagedb'
+    'imagedb',
+    'casu'
 )
 
 MIDDLEWARE_CLASSES = (

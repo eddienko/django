@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+
+
+{% load staticfiles %}
+
+{% block css.extra %}
+<link rel="stylesheet" type="text/css" href="{% static 'imagedb/style.css' %}"/>
+{% endblock css.extra %}
+
+{% block js.extra %}
+<script type="text/javascript" src="{% static 'casu/js/jquery.lazyload.js' %}"></script>
+{% endblock js.extra %}
+
+{% block sitetitle %}ImageDB{% endblock sitetitle %}
+
+{% block cssmenu %}{% include "imagedb/cssmenu.html" %}{% endblock cssmenu %}
+
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+{% block pagename %}
+Image Collections
+{% endblock pagename %}
+
+
+{% block content %}
+
+<table style="width: 100%">
+    <tr>
+        <th>Survey</th>
+        <th>Field</th>
+        <th>Telescope</th>
+        <th>Instrument</th>
+        <th>Waveband</th>
+        <th>Number of images</th>
+        <th>R.A. range</th>
+        <th>Dec range</th>
+        <th>PI</th>
+        <th>Status</th>
+    </tr>
+{% for item in collection %}
+    {% if item.number %}
+    <tr>
+        <td>{{ item.survey }}</td>
+        <td>{{ item.field }}</td>
+        <td>{{ item.telescope }}</td>
+        <td>{{ item.instrument }}</td>
+        <td>{{ item.filter }}</td>
+        <td>{{ item.number }}</td>
+        <td>[ {{ item.cenra__min|floatformat:2 }}, {{ item.cenra__max|floatformat:2 }} ]</td>
+        <td>[ {{ item.cendec__min|floatformat:2 }}, {{ item.cendec__max|floatformat:2 }} ]</td>
+        <td>{{ item.pi }}</td>
+        <td>{{ item.status|capfirst }}</td>
+    </tr>
+    {% endif %}
+{% endfor %}
+</table>
+
+{% endblock content%}

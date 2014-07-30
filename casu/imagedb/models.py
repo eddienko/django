@@ -10,9 +10,6 @@ class Request(models.Model):
     ra = models.FloatField()
     dec = models.FloatField()
     size = models.FloatField()
-#    path = models.CharField(max_length=200)
-#    hdu = models.PositiveSmallIntegerField()
-#    image = models.IntegerField()
     options = models.CharField(max_length=20)
     success = models.BooleanField()
     md5hash = models.CharField(max_length=80)
@@ -30,9 +27,11 @@ class Cache(models.Model):
 
     image = models.IntegerField(null=True)
 
-    #waveband = models.CharField(max_length=40)
-    #telescope =  models.CharField(max_length=40)
-    #instrument =  models.CharField(max_length=40)
+    annotation = models.CharField(max_length=256, null=True)
+
+    waveband = models.CharField(max_length=40)
+    telescope =  models.CharField(max_length=40)
+    instrument =  models.CharField(max_length=40)
     #seeing = models.FloatField(null=True)
     #skynoise = models.FloatField(null=True)
     #pixscl = models.FloatField()
@@ -41,7 +40,24 @@ class Cache(models.Model):
 
 
 class Collection(models.Model):
-    name = models.CharField(max_length=256)
+    cnum = models.IntegerField()
+    field = models.CharField(max_length=20)
+    subfield = models.CharField(max_length=20, null=True)
+    survey = models.CharField(max_length=60)
+    telescope = models.CharField(max_length=60)
+    instrument = models.CharField(max_length=60)
+    proposal = models.CharField(max_length=60, null=True)
+    area = models.FloatField(null=True)
+    cenra = models.FloatField(null=True)
+    cendec = models.FloatField(null=True)
+    wavelength =  models.FloatField(null=True)
+    filter = models.CharField(max_length=20)
+    status = models.CharField(max_length=20)
+    depth = models.FloatField(null=True)
+    units = models.CharField(max_length=20, null=True)
+    pi = models.CharField(max_length=60, null=True)
+    reference = models.CharField(max_length=60, null=True)
+    url = models.CharField(max_length=60, null=True)
     addinfo = models.CharField(max_length=256)
 
 class Image(models.Model):
@@ -49,6 +65,7 @@ class Image(models.Model):
     filepath = models.CharField(max_length=256)
     objname = models.CharField(max_length=40)
     extno = models.IntegerField()
+    dateobs = models.DateTimeField(null=True)
     waveband = models.CharField(max_length=40)
     telescope =  models.CharField(max_length=40)
     instrument =  models.CharField(max_length=40)

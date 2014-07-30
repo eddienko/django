@@ -1,4 +1,9 @@
 
+import re
+
+MOBILE_AGENT_RE=re.compile(r".*(iphone|mobile|android)",re.IGNORECASE)
+
+
 class ImageDict(dict):
     def __getattr__(self, name):
         return self[name]
@@ -11,6 +16,10 @@ def SortKey(item):
     else:
         j=99
     return j
+
+def isMobile(request):
+    #print request.META['HTTP_USER_AGENT'], MOBILE_AGENT_RE.match(request.META['HTTP_USER_AGENT']), '*********'
+    return MOBILE_AGENT_RE.match(request.META['HTTP_USER_AGENT'])
 
 def celeryStatus():
     try:

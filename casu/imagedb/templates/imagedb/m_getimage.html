@@ -23,10 +23,11 @@
 </script>
 {% endblock head.extra %}
 
-{% block sitetitle %}ImageDB{% endblock sitetitle %}
+{% block sitetitle %}ImageDB Mobile{% endblock sitetitle %}
+
+
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-
 
 {% block pagename %}
 Postage Stamp
@@ -102,8 +103,6 @@ Postage Stamp
 
 <!--p>Download all stamps: [ <a href="#">PNG</a> ] &nbsp; [ <a href="#">FITS</a> ] </p-->
 
-{% if celeryStatus %}
-
 <h3 style="display: block; border-bottom: 1px solid #ccc; padding: 1em">Postage Stamps</h3>
 <ul style="list-style-type: none;  ">
     {% if vistaRGB %}
@@ -171,9 +170,6 @@ Postage Stamp
 </ul>
 
 <br clear="left"/>
-
-{% endif %}
-
 {% endif %}
 
 {% endblock content%}

@@ -1,8 +1,12 @@
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 	<head>
 		<!-- https://github.com/tedtieken/django-slingshot/blob/master/templatetemplates/magazine/templates/base.html -->
-		
+
+        {% load active from navigation %}
+
 		{% load staticfiles %}
 		
 		{% block css %}
@@ -37,7 +41,17 @@
 			<div id="sitetitle">{% block sitetitle %}Site Title{% endblock sitetitle %}</div>
 
             <div id='cssmenu'>
-            {% block cssmenu %}  {% endblock cssmenu %}
+
+                <ul>
+                   <li class='{% active 'pages-pages' %}'><a href='index.html'><span>Home</span></a></li>
+                   <li class='{% active 'collection' %}'><a href="{% url 'imagedb:collection' %}"><span>Collections</span></a></li>
+                   <li class='{% active 'getImage' %}'><a href="{% url 'imagedb:getImage' %}"><span>Stamps</span></a></li>
+                   <li><a href='#'><span>About</span></a></li>
+                   <li class='last'><a href='#'><span></span></a></li>
+                </ul>
+
+
+
             </div>
 
 		</div>

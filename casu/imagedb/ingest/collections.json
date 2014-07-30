@@ -1,0 +1,221 @@
+#
+# INT WFC
+#
+{"field": "Lockman", "survey": "INT/WFC", "telescope": "INT", "instrument": "WFC", "filter": "U", "status": "public", "pi": "E. Gonzalez-Solares"}
+{"field": "Lockman", "survey": "INT/WFC", "telescope": "INT", "instrument": "WFC", "filter": "g", "status": "public", "pi": "E. Gonzalez-Solares"}
+{"field": "Lockman", "survey": "INT/WFC", "telescope": "INT", "instrument": "WFC", "filter": "r", "status": "public", "pi": "E. Gonzalez-Solares"}
+{"field": "Lockman", "survey": "INT/WFC", "telescope": "INT", "instrument": "WFC", "filter": "i", "status": "public", "pi": "E. Gonzalez-Solares"}
+{"field": "Lockman", "survey": "INT/WFC", "telescope": "INT", "instrument": "WFC", "filter": "z", "status": "public", "pi": "E. Gonzalez-Solares"}
+#
+{"field": "EN1", "survey": "INT/WFC", "telescope": "INT", "instrument": "WFC", "filter": "U", "status": "public", "pi": "E. Gonzalez-Solares"}
+{"field": "EN1", "survey": "INT/WFC", "telescope": "INT", "instrument": "WFC", "filter": "g", "status": "public", "pi": "E. Gonzalez-Solares"}
+{"field": "EN1", "survey": "INT/WFC", "telescope": "INT", "instrument": "WFC", "filter": "r", "status": "public", "pi": "E. Gonzalez-Solares"}
+{"field": "EN1", "survey": "INT/WFC", "telescope": "INT", "instrument": "WFC", "filter": "i", "status": "public", "pi": "E. Gonzalez-Solares"}
+{"field": "EN1", "survey": "INT/WFC", "telescope": "INT", "instrument": "WFC", "filter": "z", "status": "public", "pi": "E. Gonzalez-Solares"}
+#
+{"field": "EN2", "survey": "INT/WFC", "telescope": "INT", "instrument": "WFC", "filter": "U", "status": "public", "pi": "E. Gonzalez-Solares"}
+{"field": "EN2", "survey": "INT/WFC", "telescope": "INT", "instrument": "WFC", "filter": "g", "status": "public", "pi": "E. Gonzalez-Solares"}
+{"field": "EN2", "survey": "INT/WFC", "telescope": "INT", "instrument": "WFC", "filter": "r", "status": "public", "pi": "E. Gonzalez-Solares"}
+{"field": "EN2", "survey": "INT/WFC", "telescope": "INT", "instrument": "WFC", "filter": "i", "status": "public", "pi": "E. Gonzalez-Solares"}
+{"field": "EN2", "survey": "INT/WFC", "telescope": "INT", "instrument": "WFC", "filter": "z", "status": "public", "pi": "E. Gonzalez-Solares"}
+#
+{"field": "FLS", "survey": "INT/WFC", "telescope": "INT", "instrument": "WFC", "filter": "U", "status": "public", "pi": "E. Gonzalez-Solares"}
+{"field": "FLS", "survey": "INT/WFC", "telescope": "INT", "instrument": "WFC", "filter": "g", "status": "public", "pi": "E. Gonzalez-Solares"}
+{"field": "FLS", "survey": "INT/WFC", "telescope": "INT", "instrument": "WFC", "filter": "r", "status": "public", "pi": "E. Gonzalez-Solares"}
+{"field": "FLS", "survey": "INT/WFC", "telescope": "INT", "instrument": "WFC", "filter": "i", "status": "public", "pi": "E. Gonzalez-Solares"}
+{"field": "FLS", "survey": "INT/WFC", "telescope": "INT", "instrument": "WFC", "filter": "z", "status": "public", "pi": "E. Gonzalez-Solares"}
+#
+{"field": "HATLAS", "survey": "INT/WFC", "telescope": "INT", "instrument": "WFC", "filter": "U", "status": "public", "pi": "M. Jarvis"}
+{"field": "HATLAS", "survey": "INT/WFC", "telescope": "INT", "instrument": "WFC", "filter": "g", "status": "public", "pi": "M. Jarvis"}
+{"field": "HATLAS", "survey": "INT/WFC", "telescope": "INT", "instrument": "WFC", "filter": "r", "status": "public", "pi": "M. Jarvis"}
+{"field": "HATLAS", "survey": "INT/WFC", "telescope": "INT", "instrument": "WFC", "filter": "i", "status": "public", "pi": "M. Jarvis"}
+{"field": "HATLAS", "survey": "INT/WFC", "telescope": "INT", "instrument": "WFC", "filter": "z", "status": "public", "pi": "M. Jarvis"}
+#
+# VST
+#
+{"field": "ATLAS", "survey": "ATLAS", "telescope": "VST", "instrument": "OMEGACAM", "filter": "u_SDSS", "status": "public", "pi": "T. Shanks"}
+{"field": "ATLAS", "survey": "ATLAS", "telescope": "VST", "instrument": "OMEGACAM", "filter": "g_SDSS", "status": "public", "pi": "T. Shanks"}
+{"field": "ATLAS", "survey": "ATLAS", "telescope": "VST", "instrument": "OMEGACAM", "filter": "r_SDSS", "status": "public", "pi": "T. Shanks"}
+{"field": "ATLAS", "survey": "ATLAS", "telescope": "VST", "instrument": "OMEGACAM", "filter": "i_SDSS", "status": "public", "pi": "T. Shanks"}
+{"field": "ATLAS", "survey": "ATLAS", "telescope": "VST", "instrument": "OMEGACAM", "filter": "z_SDSS", "status": "public", "pi": "T. Shanks"}
+#
+{"field": "VPHAS", "survey": "VPHAS", "telescope": "VST", "instrument": "OMEGACAM", "filter": "u_SDSS", "status": "public", "pi": "J. Drew"}
+{"field": "VPHAS", "survey": "VPHAS", "telescope": "VST", "instrument": "OMEGACAM", "filter": "g_SDSS", "status": "public", "pi": "J. Drew"}
+{"field": "VPHAS", "survey": "VPHAS", "telescope": "VST", "instrument": "OMEGACAM", "filter": "r_SDSS", "status": "public", "pi": "J. Drew"}
+{"field": "VPHAS", "survey": "VPHAS", "telescope": "VST", "instrument": "OMEGACAM", "filter": "i_SDSS", "status": "public", "pi": "J. Drew"}
+{"field": "VPHAS", "survey": "VPHAS", "telescope": "VST", "instrument": "OMEGACAM", "filter": "z_SDSS", "status": "public", "pi": "J. Drew"}
+{"field": "VPHAS", "survey": "VPHAS", "telescope": "VST", "instrument": "OMEGACAM", "filter": "NB_659", "status": "public", "pi": "J. Drew"}
+#
+{"field": "KIDS", "survey": "KIDS", "telescope": "VST", "instrument": "OMEGACAM", "filter": "u_SDSS", "status": "public", "pi": "K. Kuijken"}
+{"field": "KIDS", "survey": "KIDS", "telescope": "VST", "instrument": "OMEGACAM", "filter": "g_SDSS", "status": "public", "pi": "K. Kuijken"}
+{"field": "KIDS", "survey": "KIDS", "telescope": "VST", "instrument": "OMEGACAM", "filter": "r_SDSS", "status": "public", "pi": "K. Kuijken"}
+{"field": "KIDS", "survey": "KIDS", "telescope": "VST", "instrument": "OMEGACAM", "filter": "i_SDSS", "status": "public", "pi": "K. Kuijken"}
+{"field": "KIDS", "survey": "KIDS", "telescope": "VST", "instrument": "OMEGACAM", "filter": "z_SDSS", "status": "public", "pi": "K. Kuijken"}
+{"field": "KIDS", "survey": "KIDS", "telescope": "VST", "instrument": "OMEGACAM", "filter": "NB_659", "status": "public", "pi": "K. Kuijken"}
+#
+{"field": "OTHER", "survey": "OTHER", "telescope": "VST", "instrument": "OMEGACAM", "filter": "u_SDSS", "status": "public"}
+{"field": "OTHER", "survey": "OTHER", "telescope": "VST", "instrument": "OMEGACAM", "filter": "g_SDSS", "status": "public"}
+{"field": "OTHER", "survey": "OTHER", "telescope": "VST", "instrument": "OMEGACAM", "filter": "r_SDSS", "status": "public"}
+{"field": "OTHER", "survey": "OTHER", "telescope": "VST", "instrument": "OMEGACAM", "filter": "i_SDSS", "status": "public"}
+{"field": "OTHER", "survey": "OTHER", "telescope": "VST", "instrument": "OMEGACAM", "filter": "z_SDSS", "status": "public"}
+{"field": "OTHER", "survey": "OTHER", "telescope": "VST", "instrument": "OMEGACAM", "filter": "NB_659", "status": "public"}
+#
+# VISTA
+#
+{"field": "ATLAS", "survey": "VHS", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "Z", "status": "public", "pi": "R. G. McMahon"}
+{"field": "ATLAS", "survey": "VHS", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "Y", "status": "public", "pi": "R. G. McMahon"}
+{"field": "ATLAS", "survey": "VHS", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "J", "status": "public", "pi": "R. G. McMahon"}
+{"field": "ATLAS", "survey": "VHS", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "H", "status": "public", "pi": "R. G. McMahon"}
+{"field": "ATLAS", "survey": "VHS", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "Ks", "status": "public", "pi": "R. G. McMahon"}
+#
+{"field": "DES", "survey": "VHS", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "Z", "status": "public", "pi": "R. G. McMahon"}
+{"field": "DES", "survey": "VHS", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "Y", "status": "public", "pi": "R. G. McMahon"}
+{"field": "DES", "survey": "VHS", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "J", "status": "public", "pi": "R. G. McMahon"}
+{"field": "DES", "survey": "VHS", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "H", "status": "public", "pi": "R. G. McMahon"}
+{"field": "DES", "survey": "VHS", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "Ks", "status": "public", "pi": "R. G. McMahon"}
+#
+{"field": "GPS", "survey": "VHS", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "Z", "status": "public", "pi": "R. G. McMahon"}
+{"field": "GPS", "survey": "VHS", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "Y", "status": "public", "pi": "R. G. McMahon"}
+{"field": "GPS", "survey": "VHS", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "J", "status": "public", "pi": "R. G. McMahon"}
+{"field": "GPS", "survey": "VHS", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "H", "status": "public", "pi": "R. G. McMahon"}
+{"field": "GPS", "survey": "VHS", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "Ks", "status": "public", "pi": "R. G. McMahon"}
+#
+{"field": "NGP", "survey": "VIKING", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "Z", "status": "public", "pi": "A. Edge"}
+{"field": "NGP", "survey": "VIKING", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "Y", "status": "public", "pi": "A. Edge"}
+{"field": "NGP", "survey": "VIKING", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "J", "status": "public", "pi": "A. Edge"}
+{"field": "NGP", "survey": "VIKING", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "H", "status": "public", "pi": "A. Edge"}
+{"field": "NGP", "survey": "VIKING", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "Ks", "status": "public", "pi": "A. Edge"}
+#
+{"field": "SGP", "survey": "VIKING", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "Z", "status": "public", "pi": "A. Edge"}
+{"field": "SGP", "survey": "VIKING", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "Y", "status": "public", "pi": "A. Edge"}
+{"field": "SGP", "survey": "VIKING", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "J", "status": "public", "pi": "A. Edge"}
+{"field": "SGP", "survey": "VIKING", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "H", "status": "public", "pi": "A. Edge"}
+{"field": "SGP", "survey": "VIKING", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "Ks", "status": "public", "pi": "A. Edge"}
+#
+{"field": "GAMA", "survey": "VIKING", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "Z", "status": "public", "pi": "A. Edge"}
+{"field": "GAMA", "survey": "VIKING", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "Y", "status": "public", "pi": "A. Edge"}
+{"field": "GAMA", "survey": "VIKING", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "J", "status": "public", "pi": "A. Edge"}
+{"field": "GAMA", "survey": "VIKING", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "H", "status": "public", "pi": "A. Edge"}
+{"field": "GAMA", "survey": "VIKING", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "Ks", "status": "public", "pi": "A. Edge"}
+#
+{"field": "SMC", "survey": "VMC", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "Z", "status": "public", "pi": "M. Cioni"}
+{"field": "SMC", "survey": "VMC", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "Y", "status": "public", "pi": "M. Cioni"}
+{"field": "SMC", "survey": "VMC", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "J", "status": "public", "pi": "M. Cioni"}
+{"field": "SMC", "survey": "VMC", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "H", "status": "public", "pi": "M. Cioni"}
+{"field": "SMC", "survey": "VMC", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "Ks", "status": "public", "pi": "M. Cioni"}
+#
+{"field": "LMC", "survey": "VMC", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "Z", "status": "public", "pi": "M. Cioni"}
+{"field": "LMC", "survey": "VMC", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "Y", "status": "public", "pi": "M. Cioni"}
+{"field": "LMC", "survey": "VMC", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "J", "status": "public", "pi": "M. Cioni"}
+{"field": "LMC", "survey": "VMC", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "H", "status": "public", "pi": "M. Cioni"}
+{"field": "LMC", "survey": "VMC", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "Ks", "status": "public", "pi": "M. Cioni"}
+#
+{"field": "BRIDGE", "survey": "VMC", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "Z", "status": "public", "pi": "M. Cioni"}
+{"field": "BRIDGE", "survey": "VMC", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "Y", "status": "public", "pi": "M. Cioni"}
+{"field": "BRIDGE", "survey": "VMC", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "J", "status": "public", "pi": "M. Cioni"}
+{"field": "BRIDGE", "survey": "VMC", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "H", "status": "public", "pi": "M. Cioni"}
+{"field": "BRIDGE", "survey": "VMC", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "Ks", "status": "public", "pi": "M. Cioni"}
+#
+{"field": "STREAM", "survey": "VMC", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "Z", "status": "public", "pi": "M. Cioni"}
+{"field": "STREAM", "survey": "VMC", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "Y", "status": "public", "pi": "M. Cioni"}
+{"field": "STREAM", "survey": "VMC", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "J", "status": "public", "pi": "M. Cioni"}
+{"field": "STREAM", "survey": "VMC", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "H", "status": "public", "pi": "M. Cioni"}
+{"field": "STREAM", "survey": "VMC", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "Ks", "status": "public", "pi": "M. Cioni"}
+#
+{"field": "XMM", "survey": "VIDEO", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "Z", "status": "public", "pi": "M. Jarvis"}
+{"field": "XMM", "survey": "VIDEO", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "Y", "status": "public", "pi": "M. Jarvis"}
+{"field": "XMM", "survey": "VIDEO", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "J", "status": "public", "pi": "M. Jarvis"}
+{"field": "XMM", "survey": "VIDEO", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "H", "status": "public", "pi": "M. Jarvis"}
+{"field": "XMM", "survey": "VIDEO", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "Ks", "status": "public", "pi": "M. Jarvis"}
+#
+{"field": "CDFS", "survey": "VIDEO", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "Z", "status": "public", "pi": "M. Jarvis"}
+{"field": "CDFS", "survey": "VIDEO", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "Y", "status": "public", "pi": "M. Jarvis"}
+{"field": "CDFS", "survey": "VIDEO", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "J", "status": "public", "pi": "M. Jarvis"}
+{"field": "CDFS", "survey": "VIDEO", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "H", "status": "public", "pi": "M. Jarvis"}
+{"field": "CDFS", "survey": "VIDEO", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "Ks", "status": "public", "pi": "M. Jarvis"}
+#
+{"field": "ES", "survey": "VIDEO", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "Z", "status": "public", "pi": "M. Jarvis"}
+{"field": "ES", "survey": "VIDEO", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "Y", "status": "public", "pi": "M. Jarvis"}
+{"field": "ES", "survey": "VIDEO", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "J", "status": "public", "pi": "M. Jarvis"}
+{"field": "ES", "survey": "VIDEO", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "H", "status": "public", "pi": "M. Jarvis"}
+{"field": "ES", "survey": "VIDEO", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "Ks", "status": "public", "pi": "M. Jarvis"}
+#
+{"field": "BULGE", "survey": "VVV", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "Z", "status": "public", "pi": "D. Minitti"}
+{"field": "BULGE", "survey": "VVV", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "Y", "status": "public", "pi": "D. Minitti"}
+{"field": "BULGE", "survey": "VVV", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "J", "status": "public", "pi": "D. Minitti"}
+{"field": "BULGE", "survey": "VVV", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "H", "status": "public", "pi": "D. Minitti"}
+{"field": "BULGE", "survey": "VVV", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "Ks", "status": "public", "pi": "D. Minitti"}
+{"field": "BULGE", "survey": "VVV", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "NB118", "status": "public", "pi": "D. Minitti"}
+{"field": "BULGE", "survey": "VVV", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "NB980", "status": "public", "pi": "D. Minitti"}
+#
+{"field": "DISK", "survey": "VVV", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "Z", "status": "public", "pi": "D. Minitti"}
+{"field": "DISK", "survey": "VVV", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "Y", "status": "public", "pi": "D. Minitti"}
+{"field": "DISK", "survey": "VVV", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "J", "status": "public", "pi": "D. Minitti"}
+{"field": "DISK", "survey": "VVV", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "H", "status": "public", "pi": "D. Minitti"}
+{"field": "DISK", "survey": "VVV", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "Ks", "status": "public", "pi": "D. Minitti"}
+{"field": "DISK", "survey": "VVV", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "NB118", "status": "public", "pi": "D. Minitti"}
+{"field": "DISK", "survey": "VVV", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "NB980", "status": "public", "pi": "D. Minitti"}
+#
+{"field": "PPI", "survey": "PPI", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "Z", "status": "private"}
+{"field": "PPI", "survey": "PPI", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "Y", "status": "private"}
+{"field": "PPI", "survey": "PPI", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "J", "status": "private"}
+{"field": "PPI", "survey": "PPI", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "H", "status": "private"}
+{"field": "PPI", "survey": "PPI", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "Ks", "status": "private"}
+{"field": "PPI", "survey": "PPI", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "NB118", "status": "private"}
+{"field": "PPI", "survey": "PPI", "telescope": "VISTA", "instrument": "VIRCAM", "filter": "NB980", "status": "private"}
+#
+# Spitzer / SWIRE
+#
+{"field": "EN1", "survey": "SWIRE", "telescope": "Spitzer", "instrument": "IRAC", "filter": "IRAC1", "status": "public", "pi": "C. Lonsdale"}
+{"field": "EN1", "survey": "SWIRE", "telescope": "Spitzer", "instrument": "IRAC", "filter": "IRAC2", "status": "public", "pi": "C. Lonsdale"}
+{"field": "EN1", "survey": "SWIRE", "telescope": "Spitzer", "instrument": "IRAC", "filter": "IRAC3", "status": "public", "pi": "C. Lonsdale"}
+{"field": "EN1", "survey": "SWIRE", "telescope": "Spitzer", "instrument": "IRAC", "filter": "IRAC4", "status": "public", "pi": "C. Lonsdale"}
+{"field": "EN1", "survey": "SWIRE", "telescope": "Spitzer", "instrument": "MIPS", "filter": "MIPS1", "status": "public", "pi": "C. Lonsdale"}
+{"field": "EN1", "survey": "SWIRE", "telescope": "Spitzer", "instrument": "MIPS", "filter": "MIPS2", "status": "public", "pi": "C. Lonsdale"}
+{"field": "EN1", "survey": "SWIRE", "telescope": "Spitzer", "instrument": "MIPS", "filter": "MIPS3", "status": "public", "pi": "C. Lonsdale"}
+{"field": "EN1", "survey": "SWIRE", "telescope": "Spitzer", "instrument": "MIPS", "filter": "MIPS4", "status": "public", "pi": "C. Lonsdale"}
+#
+{"field": "EN2", "survey": "SWIRE", "telescope": "Spitzer", "instrument": "IRAC", "filter": "IRAC1", "status": "public", "pi": "C. Lonsdale"}
+{"field": "EN2", "survey": "SWIRE", "telescope": "Spitzer", "instrument": "IRAC", "filter": "IRAC2", "status": "public", "pi": "C. Lonsdale"}
+{"field": "EN2", "survey": "SWIRE", "telescope": "Spitzer", "instrument": "IRAC", "filter": "IRAC3", "status": "public", "pi": "C. Lonsdale"}
+{"field": "EN2", "survey": "SWIRE", "telescope": "Spitzer", "instrument": "IRAC", "filter": "IRAC4", "status": "public", "pi": "C. Lonsdale"}
+{"field": "EN2", "survey": "SWIRE", "telescope": "Spitzer", "instrument": "MIPS", "filter": "MIPS1", "status": "public", "pi": "C. Lonsdale"}
+{"field": "EN2", "survey": "SWIRE", "telescope": "Spitzer", "instrument": "MIPS", "filter": "MIPS2", "status": "public", "pi": "C. Lonsdale"}
+{"field": "EN2", "survey": "SWIRE", "telescope": "Spitzer", "instrument": "MIPS", "filter": "MIPS3", "status": "public", "pi": "C. Lonsdale"}
+{"field": "EN2", "survey": "SWIRE", "telescope": "Spitzer", "instrument": "MIPS", "filter": "MIPS4", "status": "public", "pi": "C. Lonsdale"}
+#
+{"field": "ES1", "survey": "SWIRE", "telescope": "Spitzer", "instrument": "IRAC", "filter": "IRAC1", "status": "public", "pi": "C. Lonsdale"}
+{"field": "ES1", "survey": "SWIRE", "telescope": "Spitzer", "instrument": "IRAC", "filter": "IRAC2", "status": "public", "pi": "C. Lonsdale"}
+{"field": "ES1", "survey": "SWIRE", "telescope": "Spitzer", "instrument": "IRAC", "filter": "IRAC3", "status": "public", "pi": "C. Lonsdale"}
+{"field": "ES1", "survey": "SWIRE", "telescope": "Spitzer", "instrument": "IRAC", "filter": "IRAC4", "status": "public", "pi": "C. Lonsdale"}
+{"field": "ES1", "survey": "SWIRE", "telescope": "Spitzer", "instrument": "MIPS", "filter": "MIPS1", "status": "public", "pi": "C. Lonsdale"}
+{"field": "ES1", "survey": "SWIRE", "telescope": "Spitzer", "instrument": "MIPS", "filter": "MIPS2", "status": "public", "pi": "C. Lonsdale"}
+{"field": "ES1", "survey": "SWIRE", "telescope": "Spitzer", "instrument": "MIPS", "filter": "MIPS3", "status": "public", "pi": "C. Lonsdale"}
+{"field": "ES1", "survey": "SWIRE", "telescope": "Spitzer", "instrument": "MIPS", "filter": "MIPS4", "status": "public", "pi": "C. Lonsdale"}
+#
+{"field": "Lockman", "survey": "SWIRE", "telescope": "Spitzer", "instrument": "IRAC", "filter": "IRAC1", "status": "public", "pi": "C. Lonsdale"}
+{"field": "Lockman", "survey": "SWIRE", "telescope": "Spitzer", "instrument": "IRAC", "filter": "IRAC2", "status": "public", "pi": "C. Lonsdale"}
+{"field": "Lockman", "survey": "SWIRE", "telescope": "Spitzer", "instrument": "IRAC", "filter": "IRAC3", "status": "public", "pi": "C. Lonsdale"}
+{"field": "Lockman", "survey": "SWIRE", "telescope": "Spitzer", "instrument": "IRAC", "filter": "IRAC4", "status": "public", "pi": "C. Lonsdale"}
+{"field": "Lockman", "survey": "SWIRE", "telescope": "Spitzer", "instrument": "MIPS", "filter": "MIPS1", "status": "public", "pi": "C. Lonsdale"}
+{"field": "Lockman", "survey": "SWIRE", "telescope": "Spitzer", "instrument": "MIPS", "filter": "MIPS2", "status": "public", "pi": "C. Lonsdale"}
+{"field": "Lockman", "survey": "SWIRE", "telescope": "Spitzer", "instrument": "MIPS", "filter": "MIPS3", "status": "public", "pi": "C. Lonsdale"}
+{"field": "Lockman", "survey": "SWIRE", "telescope": "Spitzer", "instrument": "MIPS", "filter": "MIPS4", "status": "public", "pi": "C. Lonsdale"}
+#
+{"field": "XMM", "survey": "SWIRE", "telescope": "Spitzer", "instrument": "IRAC", "filter": "IRAC1", "status": "public", "pi": "C. Lonsdale"}
+{"field": "XMM", "survey": "SWIRE", "telescope": "Spitzer", "instrument": "IRAC", "filter": "IRAC2", "status": "public", "pi": "C. Lonsdale"}
+{"field": "XMM", "survey": "SWIRE", "telescope": "Spitzer", "instrument": "IRAC", "filter": "IRAC3", "status": "public", "pi": "C. Lonsdale"}
+{"field": "XMM", "survey": "SWIRE", "telescope": "Spitzer", "instrument": "IRAC", "filter": "IRAC4", "status": "public", "pi": "C. Lonsdale"}
+{"field": "XMM", "survey": "SWIRE", "telescope": "Spitzer", "instrument": "MIPS", "filter": "MIPS1", "status": "public", "pi": "C. Lonsdale"}
+{"field": "XMM", "survey": "SWIRE", "telescope": "Spitzer", "instrument": "MIPS", "filter": "MIPS2", "status": "public", "pi": "C. Lonsdale"}
+{"field": "XMM", "survey": "SWIRE", "telescope": "Spitzer", "instrument": "MIPS", "filter": "MIPS3", "status": "public", "pi": "C. Lonsdale"}
+{"field": "XMM", "survey": "SWIRE", "telescope": "Spitzer", "instrument": "MIPS", "filter": "MIPS4", "status": "public", "pi": "C. Lonsdale"}
+#
+{"field": "CDFS", "survey": "SWIRE", "telescope": "Spitzer", "instrument": "IRAC", "filter": "IRAC1", "status": "public", "pi": "C. Lonsdale"}
+{"field": "CDFS", "survey": "SWIRE", "telescope": "Spitzer", "instrument": "IRAC", "filter": "IRAC2", "status": "public", "pi": "C. Lonsdale"}
+{"field": "CDFS", "survey": "SWIRE", "telescope": "Spitzer", "instrument": "IRAC", "filter": "IRAC3", "status": "public", "pi": "C. Lonsdale"}
+{"field": "CDFS", "survey": "SWIRE", "telescope": "Spitzer", "instrument": "IRAC", "filter": "IRAC4", "status": "public", "pi": "C. Lonsdale"}
+{"field": "CDFS", "survey": "SWIRE", "telescope": "Spitzer", "instrument": "MIPS", "filter": "MIPS1", "status": "public", "pi": "C. Lonsdale"}
+{"field": "CDFS", "survey": "SWIRE", "telescope": "Spitzer", "instrument": "MIPS", "filter": "MIPS2", "status": "public", "pi": "C. Lonsdale"}
+{"field": "CDFS", "survey": "SWIRE", "telescope": "Spitzer", "instrument": "MIPS", "filter": "MIPS3", "status": "public", "pi": "C. Lonsdale"}
+{"field": "CDFS", "survey": "SWIRE", "telescope": "Spitzer", "instrument": "MIPS", "filter": "MIPS4", "status": "public", "pi": "C. Lonsdale"}
