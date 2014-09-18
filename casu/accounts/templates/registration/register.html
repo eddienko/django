@@ -1,0 +1,22 @@
+{% load staticfiles %}
+
+{% block css.extra %}
+<link rel="stylesheet" type="text/css" href="{% static 'accounts/style.css' %}"/>
+{% endblock css.extra %}
+
+
+
+{% block content %}
+
+        <div class="login-card">
+  <h1>Create an account</h1>
+<br/>
+
+  <form action="" method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" class="login login-submit" value="Create the account">
+  </form>
+
+            </div>
+{% endblock %}

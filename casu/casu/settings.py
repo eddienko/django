@@ -50,6 +50,7 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'casu', 'static').replace('\\','/'),
 )
 
+LOGIN_REDIRECT_URL = "/"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -84,6 +85,12 @@ ROOT_URLCONF = 'casu.urls'
 
 WSGI_APPLICATION = 'casu.wsgi.application'
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+    }
+}
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases

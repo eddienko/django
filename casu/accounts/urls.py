@@ -1,9 +1,10 @@
 from django.conf.urls import patterns, url, include
 
-from imagedb import views
+from accounts import views
 
 urlpatterns = patterns('',
     url(r'', include('django.contrib.auth.urls')),
+    url(r'^register', views.register, name='register'),
     #url(r'^login/$', 'django.contrib.auth.views.login',  name='login'),
     #url(r'^login$', 'django.contrib.auth.views.login', {'template_name': 'accounts/login.html'}),
     #url(r'^logout$', 'django.contrib.auth.views.logout', {'next_page': '/'}),

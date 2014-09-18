@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+
+
+{% load staticfiles %}
+
+{% block css.extra %}
+<link rel="stylesheet" type="text/css" href="{% static 'imagedb/style.css' %}"/>
+{% endblock css.extra %}
+
+{% block js.extra %}
+<script type="text/javascript" src="{% static 'imagedb/js/highcharts.js' %}"></script>
+<script type="text/javascript" src="{% static 'imagedb/js/highcharts-more.js' %}"></script>
+{% endblock js.extra %}
+
+{% block sitetitle %}ImageDB{% endblock sitetitle %}
+
+{% block cssmenu %}{% include "imagedb/cssmenu.html" %}{% endblock cssmenu %}
+
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+{% block pagename %}
+Image Collections
+{% endblock pagename %}
+
+
+{% block content %}
+
+{% autoescape off %}
+
+
+        		<script type="text/javascript">
+
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            type: 'scatter',
+            zoomType: 'xy'
+        },
+        title: {
+            text: 'Height Versus Weight of 507 Individuals by Gender'
+        },
+        subtitle: {
+            text: 'Source: Heinz  2003'
+        },
+        xAxis: {
+            title: {
+                enabled: true,
+                text: 'R.A. (deg)'
+            },
+            startOnTick: true,
+            endOnTick: true,
+            showLastLabel: true
+        },
+        yAxis: {
+            title: {
+                text: 'Dec (deg)'
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'left',
+            verticalAlign: 'top',
+            x: 100,
+            y: 70,
+            floating: true,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF',
+            borderWidth: 1
+        },
+        plotOptions: {
+            scatter: {
+                marker: {
+                    radius: 5,
+                    states: {
+                        hover: {
+                            enabled: true,
+                            lineColor: 'rgb(100,100,100)'
+                        }
+                    }
+                },
+                states: {
+                    hover: {
+                        marker: {
+                            enabled: false
+                        }
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<b>{series.name}</b><br>',
+                    pointFormat: '{point.x} cm, {point.y} kg'
+                }
+            }
+        },
+        series: [ {{ data }} ]
+        });
+        });
+
+
+		</script>
+
+{% endautoescape %}
+
+<div class="collection">
+<div id="container" style="height: 600px; min-width: 310px; max-width: 800px; margin: 0 auto"></div>
+</div>
+
+{% endblock content%}

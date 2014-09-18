@@ -1,13 +1,20 @@
-{% extends "base.html" %}
+
+{% load staticfiles %}
+
+{% block css.extra %}
+<link rel="stylesheet" type="text/css" href="{% static 'accounts/style.css' %}"/>
+{% endblock css.extra %}
 
 {% block content %}
 
+        <div style="height: 50px"></div>
+
+<div class="login-card">
+    <h1> Log-in </h1>
 {% if form.errors %}
-<p>Your username and password did not match. Please try again</p>
-{% endif %}
-
-
-<form method="post" action="{% url 'django.contrib.auth.views.login' %}">
+<p style="color: #dd0000; font-size: smaller">Your username and password did not match. Please try again</p>
+{% endif %}<br/>
+<form id="login_form" method="post" action="{% url 'django.contrib.auth.views.login' %}">
     {% csrf_token %}
     <table>
         <tr>
@@ -20,10 +27,16 @@
         </tr>
     </table>
 
-    <input type="submit" value="login"/>
+    <input type="submit" class="login login-submit" value="login"/>
     <input type="hidden" name="next" value="{{ next }}"/>
 
 </form>
+<div class="login-help">
+    <a href="{% url 'register' %}">Register</a> • <a href="{% url 'django.contrib.auth.views.password_reset' %}">Forgot Password</a>
+  </div>
+</div>
+
+        <div class="gradient"></div>
 
 
 {% endblock %}

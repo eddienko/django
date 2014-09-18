@@ -2,11 +2,15 @@
 import os
 import time
 import base64
+import json
 
 from django.shortcuts import render
-from django.http import HttpResponse
-from django.shortcuts import render
+from django.http import HttpResponse, JsonResponse
+from django.shortcuts import render, redirect
 from django.db.models import Max, Min
+from django.views.decorators.cache import cache_page
+
+from celery.result import AsyncResult
 
 from imagedb.models import Request, Image, Cache, Collection
 from imagedb.utils import ImageDict, SortKey, isMobile
@@ -19,30 +23,56 @@ from casu.settings import ALLOWED_HOSTS
 
 # Create your views here.
 def index(request):
-    return HttpResponse("Hello, world. You're at the imagedb index.")
+    context={}
+    return render(request, "imagedb/index.html", context)
 
-
+@cache_page(60 * 60)
 def collection(request):
+    """
+    Displays the list of image collections
+    :param request:
+    :return:
+    """
     context={}
 
-    c = []
-    result = Collection.objects.all()
-    for r in result:
-        dd = ImageDict()
-        for k in ['field', 'addinfo', 'survey', 'telescope', 'instrument', 'filter', 'status', 'pi']:
-            dd[k] = getattr(r, k)
-        dd['number'] = Image.objects.filter(collection = r.id).count()
-        dd.update(Image.objects.filter(collection = r.id).aggregate(Min('cenra')))
-        dd.update(Image.objects.filter(collection = r.id).aggregate(Max('cenra')))
-        dd.update(Image.objects.filter(collection = r.id).aggregate(Min('cendec')))
-        dd.update(Image.objects.filter(collection = r.id).aggregate(Max('cendec')))
-        c.append(dd)
+    try:
+        context = json.load(open('/tmp/collections.pkl'))
+    except:
+        c = []
+        result = Collection.objects.all()
+        totalimages = 0
+        for r in result:
+            dd = ImageDict()
+            for k in ['field', 'addinfo', 'survey', 'telescope', 'instrument', 'filter', 'status', 'pi']:
+                dd[k] = getattr(r, k)
+            dd['number'] = Image.objects.filter(collection = r.id).filter(ishidden=False).count()
+            totalimages = totalimages + dd['number']
+            dd.update(Image.objects.filter(collection = r.id).filter(ishidden=False).aggregate(Min('cenra')))
+            dd.update(Image.objects.filter(collection = r.id).filter(ishidden=False).aggregate(Max('cenra')))
+            dd.update(Image.objects.filter(collection = r.id).filter(ishidden=False).aggregate(Min('cendec')))
+            dd.update(Image.objects.filter(collection = r.id).filter(ishidden=False).aggregate(Max('cendec')))
+            c.append(dd)
 
-    context['collection'] = c
+        context['collection'] = c
+        context['totalimages'] = totalimages
+
+        json.dump(context,open('/tmp/collections.pkl','w'))
 
     return render(request, "imagedb/collection.html", context)
 
+def getTar(request, md5hash):
+    pass
+
 def getImage(request):
+    """
+
+    :param request:
+    :return:
+
+    Example:
+
+        http://apm14.ast.cam.ac.uk/imagedb/getImage?ra=242.0&dec=54.8&size=120.0&options=
+    """
     ip = request.META['REMOTE_ADDR']
     if isMobile(request):
         template_name = 'imagedb/m_getimage.html'
@@ -69,11 +99,13 @@ def getImage(request):
         size = float(size)
     except:
         for k in ['ra', 'dec', 'size', 'options']:
-            context[k] = request.session[k]
+            context[k] = request.session.get(k, None)
+            if context[k] is None: context.pop(k)
+            context['celeryID']=0
         return render(request, template_name, context)
 
     # Perform database query and get results
-    result = Image.objects.all().filter(cendec__gt=dec - 1, cendec__lt=dec + 1, cenra__gt=ra - 1, cenra__lt=ra + 1)
+    result = Image.objects.all().filter(cendec__gt=dec - 1, cendec__lt=dec + 1, cenra__gt=ra - 1, cenra__lt=ra + 1).filter(ishidden=False)
     onchip = "onchip(%s,%s,naxis1, naxis2, ctype1, ctype2, crval1, crval2, crpix1, crpix2, cd11, cd12, cd21, cd22, pv21, pv23, pv25)=true" % (
     ra, dec)
     result = result.extra(where=[onchip])
@@ -95,6 +127,7 @@ def getImage(request):
 
     # Save the unique md5 of the request in the session
     request.session["md5unique"] = md5unique
+    context["md5unique"] = md5unique
 
     outputDir = os.path.join(REQUESTS, '%010d' % req.id)
     if not os.access(outputDir, os.X_OK):
@@ -115,6 +148,7 @@ def getImage(request):
         # Work out if the user has access rights
         dd['avail'] = False
 
+        #print [g.name for g in request.user.groups.all()], img.groupname
         if ip in ALLOWED_HOSTS:
             dd['avail'] = True
         elif (img.groupname == 'public'):
@@ -150,7 +184,8 @@ def getImage(request):
         if images[i].waveband in bands:
                 if images[i].waveband in cbands:
                     pass
-                cbands.append(images[i].waveband)
+                else:
+                    cbands.append(images[i].waveband)
         if len(cbands)==3: break
 
     if len(cbands) == 3:
@@ -169,7 +204,8 @@ def getImage(request):
         if images[i].waveband in bands:
                 if images[i].waveband in cbands:
                     pass
-                cbands.append(images[i].waveband)
+                else:
+                    cbands.append(images[i].waveband)
         if len(cbands)==3: break
 
     if len(cbands) == 3:
@@ -188,7 +224,8 @@ def getImage(request):
         if images[i].waveband in bands:
                 if images[i].waveband in cbands:
                     pass
-                cbands.append(images[i].waveband)
+                else:
+                    cbands.append(images[i].waveband)
         if len(cbands)==3: break
 
     if len(cbands) == 3:
@@ -196,20 +233,45 @@ def getImage(request):
         context['wfcBands'] = ' '.join(cbands)
     # -------------------------------------------------------------------------
 
+    # Check if we can make colour IRAC image ---------------------------------
+    context['iracRGB'] = None
+
+    bands = ['IRAC3', 'IRAC2', 'IRAC1']
+    cbands = []
+    for i in range(len(images)):
+        if images[i].instrument.find('IRAC')<0: continue
+        if not images[i]['avail']: continue
+        if images[i].waveband in bands:
+                if images[i].waveband in cbands:
+                    pass
+                else:
+                    cbands.append(images[i].waveband)
+        if len(cbands)==3: break
+
+    if len(cbands) == 3:
+        context['iracRGB'] = 'rgbirac%s' % md5unique
+        context['iracBands'] = ' '.join(cbands)
+    # -------------------------------------------------------------------------
+
     # Check if celery is accepting connections and submit job -----------------
-    status = app.send_task('imagedb.tasks.status')
+    result = app.send_task('imagedb.tasks.status')
     time.sleep(0.1)
-    status = status.ready()
+    status = result.ready()
     context['celeryStatus'] = status
 
     outCache = CACHE + '/' + request.session['md5unique'] + '/.complete'
     if os.access(outCache, os.R_OK):
         flag=False
         context['celeryStatus'] = True
+        context['celeryID'] = result.task_id
 
     if flag:
         if status:
             result = app.send_task('imagedb.tasks.getImage', args=(req.id,))
+            context["celeryID"] = result.task_id
+            #print '****', result.task_id
+            #res = AsyncResult(result.task_id)
+            #print '****', res.ready()
     # -------------------------------------------------------------------------
 
     context['images'] = images
@@ -223,16 +285,24 @@ def getImage(request):
     return render(request, 'imagedb/getimage.html', context)
 
 
+def getStatus(request, id):
+    if id=="0": return JsonResponse({'status': True})
+    res = AsyncResult(id).ready()
+    return JsonResponse({'status': res})
+
+@cache_page(60 * 60)
 def getImageCache(request, md5hash):
     imgFile = CACHE + '/' + request.session['md5unique'] + '/%s.png' % md5hash
-    watch = time.time()
-    while not os.access(imgFile, os.R_OK):
-        if time.time() - watch > 60:
-            break
-        time.sleep(1)
-    if md5hash.find('rgb') > -1: time.sleep(1)
-    with open(imgFile, "rb") as image:
-        return HttpResponse(image.read(), mimetype="image/png")
+    print imgFile
+    #watch = time.time()
+    #while not os.access(imgFile, os.R_OK):
+    #    if time.time() - watch > 60:
+    #        break
+    #    time.sleep(1)
+    #if md5hash.find('rgb') > -1: time.sleep(1)
+    return redirect("http://apm14.ast.cam.ac.uk/cache/%s/%s.png" % (request.session['md5unique'], md5hash))
+    #with open(imgFile, "rb") as image:
+    #    return HttpResponse(image.read(), mimetype="image/png")
 
 def getImageLocal(request):
     ip = request.META['REMOTE_ADDR']
@@ -307,6 +377,7 @@ def getImageLocal(request):
     if flag:
         if status:
             result = app.send_task('imagedb.tasks.getImage', args=(req.id,))
+            print '******', result, '****'
             result.get(timeout=600)
     # -------------------------------------------------------------------------
 
@@ -390,3 +461,20 @@ def getImageLocalOLD(request):
             red.save(response, "PNG")
             return response
     
+
+def showField(request):
+
+    import json
+    context={"data": []}
+
+    for item in Collection.objects.filter(survey='INT/WFC', telescope='INT', field='EN1'):
+        data=[]
+        for img in Image.objects.filter(collection = item.id, ishidden=False):
+            data.append([img.cenra, img.cendec])
+
+        context["data"].append(r"{ name: '%s', data: %s }" % (item.filter, json.dumps(data)))
+
+    context["data"] = ', '.join(context["data"])
+
+
+    return render(request, 'imagedb/field.html', context)

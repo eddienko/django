@@ -14,18 +14,75 @@
 
 {% block head.extra %}
 <script type="text/javascript" charset="utf-8">
-  $(function() {
-     $("img.lazy").lazyload({
-        effect : "fadeIn"
+$(document).ready(function(){
+
+    $( "#toggleResults" ).click(function() {
+        $( "#queryResults" ).toggle( "slow", function() {
+            // Animation complete.
+        });
     });
-  });
+
+    $('#getimage').submit(function(){
+        $('input[type=submit]', this).attr('disabled', 'disabled');
+    });
+
+    $(function() {
+        $("img.lazy").lazyload({
+            effect : "fadeIn"
+        });
+    });
+
+    var i = setInterval( function() {
+        $.ajax({
+            url: $("#checkStatus").html(),
+            dataType: 'json',
+            success: function(json) {
+
+                if (json.status == true) {
+                    clearInterval(i);
+                    $("#imageWait").hide();
+                    $("#imageDownload").show();
+                    $("#imageList").show();
+
+                   }
+            },
+            error: function() {
+                clearInterval(i);
+            }
+        });
+        }, 1000);
+
+	// hide #back-top first
+	$("#back-top").hide();
+
+	// fade in #back-top
+	$(function () {
+		$(window).scroll(function () {
+			if ($(this).scrollTop() > 100) {
+				$('#back-top').fadeIn();
+			} else {
+				$('#back-top').fadeOut();
+			}
+		});
+
+		// scroll body to 0px on click
+		$('#back-top a').click(function () {
+			$('body,html').animate({
+				scrollTop: 0
+			}, 800);
+			return false;
+		});
+	});
+
+});
+
 
 </script>
 {% endblock head.extra %}
 
 {% block sitetitle %}ImageDB{% endblock sitetitle %}
 
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
 
 
 {% block pagename %}
@@ -34,8 +91,12 @@ Postage Stamp
 
 
 {% block content %}
+<span id="checkStatus" style="display: none"> {% url 'imagedb:getStatus' celeryID %} </span>
 
 
+<div class="getImage-form">
+    <h1>Query Form</h1>
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 <form id="getimage" action="{% url 'imagedb:getImage' %}" method="post">
     {% csrf_token %}
 
@@ -44,16 +105,16 @@ Postage Stamp
         <tr>
             <td valign="top" style="padding: 1em">
                 <label>R.A. (degrees)</label>
-                <input type="text" name="ra" value="{{ ra }}"><br/>
+                <input type="text" name="ra" value="{{ ra }}"><br clear="left"/>
 
                 <label>Dec (degrees)</label>
-                <input type="text" name="dec" value="{{ dec }}"><br/>
+                <input type="text" name="dec" value="{{ dec }}"><br clear="left"/>
 
                 <label>Size (arcsec)</label>
-                <input type="text" name="size" value="{{ size }}"><br/>
+                <input type="text" name="size" value="{{ size }}"><br clear="left"/>
 
                 <label>Options</label>
-                <input type="text" name="options" value="{{ options }}"><br/>
+                <input type="text" name="options" value="{{ options }}"><br clear="left"/>
             </td>
             <!--
             <td valign="top"  style="padding: 1em; border-left: 1px solid silver">
@@ -63,13 +124,15 @@ Postage Stamp
         </tr>
     </table>
 
-    <input type="submit" value="Submit"/>
+    <input type="submit" class="getImage-submit" value="Submit"/>
 </form>
+</div>
 
 {% if images %}
-<div style="padding: 1em">
-    <h3 style="display: block; border-bottom: 1px solid #ccc; padding: 1em">Query Results</h3>
-    <table style="width: 100%; border: 1px solid #ccc">
+
+<div style="padding: 0 1em; background-color: #F7F7F7; box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3); border-radius: 2px;">
+    <h3 style="display: block; border-bottom: 1px solid #ccc; padding: 1em">Query Results &nbsp; [ <span id="toggleResults" style="font-size: small">toggle</span> ]</h3>
+    <table id='queryResults' style="width: 100%;">
         <tr style="background-color: #ccc">
             <th></th>
             <th>Image Name</th>
@@ -98,23 +161,31 @@ Postage Stamp
         </tr>
         {% endfor %}
     </table>
+    <br/>
 </div>
 
 <!--p>Download all stamps: [ <a href="#">PNG</a> ] &nbsp; [ <a href="#">FITS</a> ] </p-->
 
 {% if celeryStatus %}
+<div style="padding: 0 1em; background-color: #F7F7F7; box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3); border-radius: 2px;">
+<h3 style="display: block; border-bottom: 1px solid #ccc; padding: 1em">Postage Stamps
+    <a id="imageDownload" href="{% url 'imagedb:getTar' md5unique %}" style="display: none; margin-left: 6em; border: 1px solid silver; font-size: small; background-color: #ccffff; padding: 4px; text-decoration: none">Download tar file</a>
+</h3>
+<div id="imageWait" style="height: 300px; width: 100%; text-align: center">
 
-<h3 style="display: block; border-bottom: 1px solid #ccc; padding: 1em">Postage Stamps</h3>
-<ul style="list-style-type: none;  ">
+    <p>Creating stamps.... please wait</p>
+
+</div>
+<ul id="imageList" style="list-style-type: none;  display: none">
     {% if vistaRGB %}
     <li style="display: inline; float: left; border: 0px solid silver; padding: 0.0em">
         <table>
             <tr>
-                <td style="text-align: center"> VIRCAM Colour Image <br/> &nbsp; {{vistaBands}} &nbsp; </td>
+                <td style="text-align: center"> VIRCAM Colour Image <br/> &nbsp; {{vistaBands0}} &nbsp; </td>
             </tr>
             <tr>
-                <td width="400px" height="400px" style="text-align: center">
-                    <img class="lazy" src="{% static 'casu/ajax-loader.gif' %}"
+                <td width="440px" height="410px" style="text-align: center">
+                    <img class="lazy" src="{% static 'casu/ajax-loader.png' %}"
                          data-original="{% url 'imagedb:getImageCache' vistaRGB %}"></img>
                 </td>
             </tr>
@@ -125,11 +196,11 @@ Postage Stamp
     <li style="display: inline; float: left; border: 0px solid silver; padding: 0.0em">
         <table>
             <tr>
-                <td style="text-align: center"> OMEGACAM Colour Image <br/> &nbsp; {{vstBands}} &nbsp;</td>
+                <td style="text-align: center"> OMEGACAM Colour Image <br/> &nbsp; {{vstBands0}} &nbsp;</td>
             </tr>
             <tr>
-                <td width="400px" height="400px" style="text-align: center">
-                    <img class="lazy" src="{% static 'casu/ajax-loader.gif' %}"
+                <td width="440px" height="410px" style="text-align: center">
+                    <img class="lazy" src="{% static 'casu/ajax-loader.png' %}"
                          data-original="{% url 'imagedb:getImageCache' vstRGB %}"></img>
                 </td>
             </tr>
@@ -140,12 +211,27 @@ Postage Stamp
     <li style="display: inline; float: left; border: 0px solid silver; padding: 0.0em">
         <table>
             <tr>
-                <td style="text-align: center"> WFC Colour Image <br/> &nbsp; {{wfcBands}} &nbsp;</td>
+                <td style="text-align: center"> WFC Colour Image <br/> &nbsp; {{wfcBands0}} &nbsp;</td>
             </tr>
             <tr>
-                <td width="400px" height="400px" style="text-align: center">
-                    <img class="lazy" src="{% static 'casu/ajax-loader.gif' %}"
+                <td width="440px" height="410px" style="text-align: center">
+                    <img class="lazy" src="{% static 'casu/ajax-loader.png' %}"
                          data-original="{% url 'imagedb:getImageCache' wfcRGB %}"></img>
+                </td>
+            </tr>
+        </table>
+    </li>
+    {% endif %}
+    {% if iracRGB %}
+    <li style="display: inline; float: left; border: 0px solid silver; padding: 0.0em">
+        <table>
+            <tr>
+                <td style="text-align: center"> IRAC Colour Image <br/> &nbsp; {{iracBands0}} &nbsp;</td>
+            </tr>
+            <tr>
+                <td width="440px" height="410px" style="text-align: center">
+                    <img class="lazy" src="{% static 'casu/ajax-loader.png' %}"
+                         data-original="{% url 'imagedb:getImageCache' iracRGB %}"></img>
                 </td>
             </tr>
         </table>
@@ -159,8 +245,8 @@ Postage Stamp
                 <td style="text-align: center">{{img.instrument}} - {{img.waveband}}<br/>{{img.filename}}</td>
             </tr>
             <tr>
-                <td width="400px" height="400px" style="text-align: center">
-                    <img class="lazy" src="{% static 'casu/ajax-loader.gif' %}"
+                <td width="440px" height="440px" style="text-align: center">
+                    <img class="lazy" src="{% static 'casu/ajax-loader.png' %}"
                          data-original="{% url 'imagedb:getImageCache' img.md5hash %}"></img>
                 </td>
             </tr>
@@ -171,9 +257,13 @@ Postage Stamp
 </ul>
 
 <br clear="left"/>
-
+</div>
 {% endif %}
 
 {% endif %}
+
+    <p id="back-top">
+		<a href="#top"><span></span>Back to Top</a>
+	</p>
 
 {% endblock content%}

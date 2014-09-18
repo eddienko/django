@@ -1,9 +1,11 @@
 from django.db import models
+from datetime import datetime
 
 # Create your models here.
 class Config(models.Model):
-	pathRequest = models.CharField(max_length=200)
-	pathCache = models.CharField(max_length=200)
+    pathRequest = models.CharField(max_length=200)
+    pathCache = models.CharField(max_length=200)
+
 
 class Request(models.Model):
     ip = models.CharField(max_length=60)
@@ -13,13 +15,14 @@ class Request(models.Model):
     options = models.CharField(max_length=20)
     success = models.BooleanField()
     md5hash = models.CharField(max_length=80)
-    
+
+    date = models.DateTimeField(default=datetime.now, blank=True)
     userAnonymous = models.BooleanField()
     userName = models.CharField(max_length=16, null=True)
     userGroup = models.CharField(max_length=80, null=True)
 
-class Cache(models.Model):
 
+class Cache(models.Model):
     path = models.CharField(max_length=200)
     hdu = models.PositiveSmallIntegerField()
 
@@ -30,10 +33,10 @@ class Cache(models.Model):
     annotation = models.CharField(max_length=256, null=True)
 
     waveband = models.CharField(max_length=40)
-    telescope =  models.CharField(max_length=40)
-    instrument =  models.CharField(max_length=40)
-    #seeing = models.FloatField(null=True)
-    #skynoise = models.FloatField(null=True)
+    telescope = models.CharField(max_length=40)
+    instrument = models.CharField(max_length=40)
+    # seeing = models.FloatField(null=True)
+    # skynoise = models.FloatField(null=True)
     #pixscl = models.FloatField()
 
     request = models.ForeignKey('Request')
@@ -50,7 +53,7 @@ class Collection(models.Model):
     area = models.FloatField(null=True)
     cenra = models.FloatField(null=True)
     cendec = models.FloatField(null=True)
-    wavelength =  models.FloatField(null=True)
+    wavelength = models.FloatField(null=True)
     filter = models.CharField(max_length=20)
     status = models.CharField(max_length=20)
     depth = models.FloatField(null=True)
@@ -60,6 +63,7 @@ class Collection(models.Model):
     url = models.CharField(max_length=60, null=True)
     addinfo = models.CharField(max_length=256)
 
+
 class Image(models.Model):
     filename = models.CharField(max_length=80)
     filepath = models.CharField(max_length=256)
@@ -67,10 +71,10 @@ class Image(models.Model):
     extno = models.IntegerField()
     dateobs = models.DateTimeField(null=True)
     waveband = models.CharField(max_length=40)
-    telescope =  models.CharField(max_length=40)
-    instrument =  models.CharField(max_length=40)
-    origin =  models.CharField(max_length=40)
-    observatory =  models.CharField(max_length=40)
+    telescope = models.CharField(max_length=40)
+    instrument = models.CharField(max_length=40)
+    origin = models.CharField(max_length=40)
+    observatory = models.CharField(max_length=40)
     mjd = models.FloatField()
     exptime = models.FloatField()
     seeing = models.FloatField(null=True)
@@ -105,11 +109,15 @@ class Image(models.Model):
 
     hascat = models.BooleanField()
     catname = models.CharField(max_length=80, null=True)
-    
+
     groupname = models.CharField(max_length=256)
     seqn = models.IntegerField()
+    ishidden = models.BooleanField(default=False)
 
     collection = models.ForeignKey('Collection')
+
+
+
     
     
     

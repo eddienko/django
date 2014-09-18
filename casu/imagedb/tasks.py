@@ -1,12 +1,15 @@
 from __future__ import absolute_import
 
 from celery import shared_task
+from celery.utils.log import get_task_logger
 
 import os
 import json
 import md5
 import subprocess
 from imagedb.settings import REQUESTS, CACHE
+
+logger = get_task_logger(__name__)
 
 def computemd5(args):
     return md5.new(json.dumps(args)).hexdigest()
@@ -30,7 +33,7 @@ def getImageLocal(ra, dec, size, image, hdu, options='', req = 1):
     fh.write('%s %s %s %s %s %s %s\n' % (inFile, hdu, ra, dec, size, options+'_', md5hash))
     fh.close()
     
-    p = subprocess.Popen(['./mapmaker.sh', '%010d' % req], cwd=REQUESTS)
+    p = subprocess.Popen(['./dj_mapmaker.sh', '%010d' % req], cwd=REQUESTS)
     p.wait()
           
     return
@@ -38,7 +41,7 @@ def getImageLocal(ra, dec, size, image, hdu, options='', req = 1):
 @shared_task
 def getImage(reqID = 1):
     
-    p = subprocess.Popen(['./mapmaker.sh', '%010d' % reqID], cwd=REQUESTS)
+    p = subprocess.Popen(['./dj_mapmaker.sh', '%010d' % reqID], cwd=REQUESTS)
     p.wait()
           
     return

@@ -10,6 +10,31 @@
 
 {% block js.extra %}
 <script type="text/javascript" src="{% static 'casu/js/jquery.lazyload.js' %}"></script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#search').keyup(function() {
+			searchTable($(this).val());
+		});
+	});
+
+    function searchTable(inputVal) {
+	    var table = $('#tblData');
+	    table.find('tr.data').each(function(index, row) {
+			var allCells = $(row).find('td');
+			var found = false;
+			allCells.each(function(index, td) {
+				var regExp = new RegExp(inputVal, 'i');
+				if(regExp.test($(td).text())) {
+					found = true;
+					return false;
+				}
+			});
+			if(found == true)$(row).show();else $(row).hide();
+		});
+    };
+</script>
+
 {% endblock js.extra %}
 
 {% block sitetitle %}ImageDB{% endblock sitetitle %}
@@ -26,7 +51,23 @@ Image Collections
 
 {% block content %}
 
-<table style="width: 100%">
+
+<div class="bbox">
+
+    <strong>Total number of images:</strong> {{ totalimages }}
+
+    <div id="searchBox" style="float: right">
+    <label for="search"><strong>Search </strong>     </label>
+    <input type="text" id="search" style="width: 200px; border: 1px solid black;" />
+    </div>
+</div>
+
+<div class="collection">
+
+
+
+
+<table id="tblData" style="width: 100%">
     <tr>
         <th>Survey</th>
         <th>Field</th>
@@ -39,9 +80,10 @@ Image Collections
         <th>PI</th>
         <th>Status</th>
     </tr>
+    <tr></tr>
 {% for item in collection %}
     {% if item.number %}
-    <tr>
+    <tr class="data">
         <td>{{ item.survey }}</td>
         <td>{{ item.field }}</td>
         <td>{{ item.telescope }}</td>
@@ -56,5 +98,6 @@ Image Collections
     {% endif %}
 {% endfor %}
 </table>
+</div>
 
 {% endblock content%}
